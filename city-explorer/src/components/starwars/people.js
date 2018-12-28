@@ -12,7 +12,8 @@ class StarWarsPeople extends React.Component {
       .then(data => {
         const people = data.body.results.map(person => person.name);
         this.setState({people});
-    });
+      }
+    );
   };
 
   render() {
@@ -21,7 +22,7 @@ class StarWarsPeople extends React.Component {
       <button onClick={this.fetchPeople}>Get StarWars Peeps!</button>  
       <hr />
       <ul>
-        {this.props.people.map( (person, idx) => <li key={idx}>{person}</li>)}
+        {this.state.people.map( (person, idx) => <li key={idx}>{person}</li>)}
       </ul>
       </>
     )
