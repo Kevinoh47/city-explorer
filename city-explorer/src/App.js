@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 //import logo from './logo.svg';
 //import './App.css';
-import './styles.css';
+import './styles/styles.css';
 import UrlForm from './components/backend/urlForm.js';
 import SearchForm from './components/search/searchForm.js';
 

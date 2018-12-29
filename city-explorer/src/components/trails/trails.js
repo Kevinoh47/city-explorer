@@ -1,7 +1,7 @@
 import React from 'react';
 
 // TODO push props down from searchForm... 
-class Weather extends React.Component {
+class Trails extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -10,7 +10,7 @@ class Weather extends React.Component {
   render() {
     return (
       <section>
-        <h3>Results from the Dark Sky API</h3>
+        <h3>Results from the Hiking Project API</h3>
    
 
         
@@ -19,4 +19,4 @@ class Weather extends React.Component {
   }
 }
 
-export default Weather;
+export default Trails;
