@@ -1,38 +1,22 @@
 import React, { Component } from 'react';
-//import superagent from 'superagent';
-import logo from './logo.svg';
+//import logo from './logo.svg';
 //import './App.css';
 import './styles.css';
-import StarWarsPeople from '../src/components/starwars/people.js';
-
+import UrlForm from './components/backend/urlForm.js';
+import SearchForm from './components/search/searchForm.js';
 
 class App extends Component {
-
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     title: 'City Explorer',
-  //   }
-  // }
-
   render() {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
+          <h1> City Explorer </h1>
+          <p>Enter a location below to learn about the weather, events, restaurants, movies filmed there, and more!</p>
         </header>
-        <StarWarsPeople />
+        <main>
+          <UrlForm />
+          <SearchForm />
+        </main>
       </div>
     );
   }
