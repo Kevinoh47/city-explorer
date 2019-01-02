@@ -1,22 +1,22 @@
 import React from 'react';
 
-// TODO push props down from searchForm... 
-class Weather extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+const Weather = props => {
 
-  render() {
-    return (
-      <section>
-        <h3>Results from the Dark Sky API</h3>
-   
-
-        
-      </section>
-    );
-  }
+  return (
+    <section>
+      <h3>Results from the Dark Sky API</h3>
+      {/* <ul className="weather-results">
+        {props.data && props.data.map((item, key) => {
+          return (
+            <li>
+              The forecast for {item.time} is: {item.forecast}
+            </li>
+          );
+        })}
+      </ul> */}
+    </section>
+  );
+ 
 }
 
 export default Weather;

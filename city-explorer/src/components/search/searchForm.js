@@ -11,63 +11,85 @@ class SearchForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      map: '',
-      weather: '',
-      yelp: '',
-      meetups: '',
-      movies: '',
-      trails: ''
+      inputCity: '',
+      location: {},
+      data: {
+        map: [],
+        weather: [],
+        yelp: [],
+        meetups: [],
+        movies: [],
+        trails: []
+      }
+  
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   
-  handleSubmit(event) {
-    event.preventDefault();
-    let locationStr = `portland`; //TODO parse this from form... hardcoded for now
-    let locationAPIQuery = `https://city-explorer-backend.herokuapp.com/location?data=${locationStr}`;
-    const mainUrl = `https://city-explorer-backend.herokuapp.com/`;
-    
+  handleInputCity = e =>  {
+    let inputCity = e.target.value;
+    this.setState({inputCity})
+  }
+
+  handleSubmit (e) {
+    e.preventDefault();
+    let locationStr = this.state.inputCity; 
+
+    const backend = `https://city-explorer-backend.herokuapp.com`;
+    let locationAPIQuery = `${backend}/location?data=${locationStr}`;
+
     superagent.get(locationAPIQuery)
-    .then(data => {
-      const {formatted_query, id, latitude, longitude, search_query} = data.body;
-      const dataString = `?data[id]=${id}&data[search_query]=${search_query}&data[formatted_query]=${formatted_query}&data[latitude]=${latitude}&data[longitude]=${longitude}&data[created_at]=`;
+    .then(location => {
+
       Promise.all([
-        fetch(`${mainUrl}weather${dataString}`),
-        fetch(`${mainUrl}yelp${dataString}`),
-        fetch(`${mainUrl}meetups${dataString}`),
-        fetch(`${mainUrl}movies${dataString}`),
-        fetch(`${mainUrl}trails${dataString}`)
+        superagent.get(`${locationAPIQuery}/weather`).query({data: location.body}).ok(res => true),
+        superagent.get(`${locationAPIQuery}/yelp`).query({data: location.body}).ok(res => true),
+        superagent.get(`${locationAPIQuery}/meetups`).query({data: location.body}).ok(res => true),
+        superagent.get(`${locationAPIQuery}/movies`).query({data: location.body}).ok(res => true),
+        superagent.get(`${locationAPIQuery}/trails`).query({data: location.body}).ok(res => true),
       ])
-      .then(responses => 
-        responses.map((response, idx) => { 
-          console.log(response);
-          if(idx===0) { this.setState({weather: response.url})}
-          else if(idx===1) { this.setState({yelp: response.url})}
-          else if(idx===2) {this.setState({meetups: response.url})}
-          else if(idx===3) { this.setState({movies: response.url})}
-          else if(idx===4) { this.setState({trails: response.url})}
-        } 
-      ));
+      .then(responses => {
+
+        let [weather, yelp, meetups, movies, trails] = responses;
+ 
+        this.setState(
+          {
+            location: location.body,
+            data: {
+              weather: weather.body,
+              yelp: yelp.body,
+              meetups: meetups.body,
+              movies: movies.body,
+              trails: trails.body
+            }
+          }
+        )
+
+        console.log('state object: ', this.state);  // TODO remove
+
+        return true;
+      })
     });
   }
-  // TODO state change should populate the h2 with "Here are the results for <city>, <statecode>, USA"
+
   render() {
     return (
+
       <React.Fragment>
-        <form id="search-form" onSubmit={this.handleSubmit}>
+        <form id="search-form" onSubmit={this.handleSubmit} >
           <label htmlFor="search"> Search for a location </label>
-          <input id="input-search" type="text" name="search" placeholder="Enter a location here" />
+          <input id="input-search" type="text" name="city" placeholder="Enter a location here" onChange={this.handleInputCity}/>
           <button type="submit">Explore!</button>
         </form>
-        <Map />
+        <Map location={this.state.location}/>
         <h2 className="query-placeholder"> </h2>
         <div className="column-container hide">
-          <Weather />
-          <Yelp />
-          <Meetups />
-          <Movies />
-          <Trails />
+          <Weather data={this.state.data.weather}/>
+          <Yelp data={this.state.data.yelp}/>
+          <Meetups data={this.state.data.meetups}/>
+          <Movies data={this.state.data.meetups}/>
+          <Trails data={this.state.data.meetups}/>
         </div>
       </React.Fragment>
     );
