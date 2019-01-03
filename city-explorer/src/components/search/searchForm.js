@@ -32,7 +32,7 @@ class SearchForm extends React.Component {
 
   getLocation = () => {
     const location = superagent.get(`${API}/location`).query({ data: this.state.inputCity });
-
+    console.log({location}); // TODO remove
     return location;
   };
 
@@ -73,28 +73,43 @@ class SearchForm extends React.Component {
     } catch (e) {
       console.error("Fetch Error", e);
     }
+
+    console.log("state", this.state);
   };
 
   render() {
-    return (
 
-      <React.Fragment>
-        <form id="search-form" onSubmit={this.searchCity} >
-          <label htmlFor="search"> Search for a location </label>
-          <input id="input-search" type="text" name="city" placeholder="Enter a location here" onChange={this.handleInputCity}/>
-          <button type="submit">Explore!</button>
-        </form>
-        <Map location={this.state.location}/>
-        <h2 className="query-placeholder"> </h2>
-        <div className="column-container">
-          <Weather data={this.state.data.weather}/>
-          <Yelp data={this.state.data.yelp}/>
-          <Meetups data={this.state.data.meetups}/>
-          <Movies data={this.state.data.movies}/>
-          <Trails data={this.state.data.trails}/> 
-        </div>
-      </React.Fragment>
-    );
+    let validLocation = (this.state.location && this.state.location.id > 0);
+    if(validLocation) {
+      return (
+        <React.Fragment>
+          <form id="search-form" onSubmit={this.searchCity} >
+            <label htmlFor="search"> Search for a location </label>
+            <input id="input-search" type="text" name="city" placeholder="Enter a location here" onChange={this.handleInputCity}/>
+            <button type="submit">Explore!</button>
+          </form>
+          <Map location={this.state.location}/>
+          <h2 className="query-placeholder"> </h2>
+          <div className="column-container">
+            <Weather data={this.state.data.weather}/>
+            <Yelp data={this.state.data.yelp}/>
+            <Meetups data={this.state.data.meetups}/>
+            <Movies data={this.state.data.movies}/>
+            <Trails data={this.state.data.trails}/> 
+          </div>
+        </React.Fragment>
+      );
+    } else {
+      return (
+        <React.Fragment>
+          <form id="search-form" onSubmit={this.searchCity} >
+            <label htmlFor="search"> Search for a location </label>
+            <input id="input-search" type="text" name="city" placeholder="Enter a location here" onChange={this.handleInputCity}/>
+            <button type="submit">Explore!</button>
+          </form>
+        </React.Fragment>
+      )
+    }
   }
 }
 
