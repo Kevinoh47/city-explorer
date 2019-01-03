@@ -1,22 +1,23 @@
 import React from 'react';
 
-// TODO push props down from searchForm... 
-class Meetups extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+const Meetups = props =>  {
 
-  render() {
-    return (
-      <section>
-        <h3>Results from the Meetups API</h3>
-   
-
-        
-      </section>
-    );
-  }
+  return (
+    <section>
+      <h3>Results from the Meetups API</h3>
+      <ul className="meetups-results">
+        {props.data && props.data.map((item, key) => {
+          return (
+            <li key={key}>
+            <a href={ item.link }>{ item.name }</a>
+            <p>Hosted by: { item.host }</p>
+            <p>Created on: { item.creation_date }</p>
+            </li>
+          );
+        })}
+      </ul>
+    </section>
+  );
 }
 
 export default Meetups;

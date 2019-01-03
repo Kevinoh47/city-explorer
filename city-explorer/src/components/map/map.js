@@ -9,12 +9,10 @@ const Map = props => {
   
   return (
     <React.Fragment>
-      <img id="map"  src={mapImage} alt="Map of search query" />
+      <img id="map" src={mapImage} alt="Map of search query" />
       <h2 className="query-placeholder">{props.location.formatted_query}</h2>
     </React.Fragment>
-    
   )
-  
 }
 
 export default Map;

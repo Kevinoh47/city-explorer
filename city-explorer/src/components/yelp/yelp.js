@@ -1,22 +1,23 @@
 import React from 'react';
 
-// TODO push props down from searchForm... 
-class Yelp extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+const Yelp = props => {
 
-  render() {
-    return (
-      <section>
-        <h3>Results from the Yelp API</h3>
-   
-
-        
-      </section>
-    );
-  }
+  return (
+    <section className="yelp-container">
+      <h3>Results from the Yelp API</h3>
+      <ul className="yelp-results">
+        {props.data && props.data.map((item, key) => {
+          return (
+            <li key={key}>
+              <a href={ item.url }>{ item.name }</a>
+              <p>The average rating is { item.rating } out of 5 and the average cost is { item.price } out of 4</p>
+              <img src={ item.image_url } alt=""/>
+            </li>
+          );
+        })}
+      </ul>
+    </section>
+  )
 }
 
 export default Yelp;
