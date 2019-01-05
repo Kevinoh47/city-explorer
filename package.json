@@ -1,5 +1,5 @@
 {
-  "name": "lab-27-from-codesandbox",
+  "name": "city-explorer",
   "version": "1.0.0",
   "description": "![CF](http://i.imgur.com/7v5ASc8.png) LAB =================================================",
   "keywords": [],
@@ -33,12 +33,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Kevinoh47/lab-27-from-codesandbox.git"
+    "url": "git+https://github.com/Kevinoh47/city-explorer.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Kevinoh47/lab-27-from-codesandbox/issues"
+    "url": "https://github.com/Kevinoh47/city-explorer/issues"
   },
-  "homepage": "https://github.com/Kevinoh47/lab-27-from-codesandbox#readme"
+  "homepage": "https://github.com/Kevinoh47/city-explorer#readme"
 }
