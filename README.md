@@ -10,19 +10,42 @@
 ### Links and Resources
 * [repo](https://github.com/Kevinoh47/city-explorer)
 * [travis]()
-* [AWS](http://lab-27-401.s3-website-us-west-2.amazonaws.com/)
+* [AWS]()
 
 
 ### Modules
 #### `app.js`
 ##### Exported Values and Methods
 
-###### `render() -> React.Fragment`
-render returns a section that includes links to add or subtract from the counter, and a span class that contains the counter itself, which is a react state object. 
+#### `content.js`
+##### Exported Values and Methods
+
+#### `map.js`
+##### Exported Values and Methods
+#### `meetups.js`
+##### Exported Values and Methods
+#### `movies.js`
+##### Exported Values and Methods
+
+#### `search.js`
+##### Exported Values and Methods
+The SearchForm object builds the form and martials the API calls and managing the child objects on the form. See https://www.codementor.io/blizzerand/building-forms-using-react-everything-you-need-to-know-iz3eyoq4y for a discussion of using a FormContainer component in this mannoer. 
+
+#### `trails.js`
+##### Exported Values and Methods
+#### `weather.js`
+##### Exported Values and Methods
+#### `yelp.js`
+##### Exported Values and Methods
+#### `index.js`
+##### Exported Values and Methods
+
+
+
 
 
 ### Setup
-
+Clone the repo, run npm install, and then run npm start.
 #### Running the app
 * `npm start`
 * Endpoint: `localhost:3000`
